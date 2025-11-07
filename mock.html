@@ -1,0 +1,808 @@
+<!--
+SUMMARY: Brown Faculty Club Information Architecture & Content Mapping
+
+Source site sections identified:
+1. Global Navigation – Links to About, Dining, Events, Membership, Contact
+2. Hero Section – Welcome message, hours, primary CTA
+3. Highlights/Amenities – Key benefits: exceptional cuisine, private spaces, professional staff, historic venue, central location
+4. Dining & Events – À la carte lunch hours, Barbara's Bar for private events, catering partnerships (Community Harvest, Farm Fresh RI)
+5. Membership CTA – Benefits summary, call-to-action to join
+6. Membership Form – (User's existing multi-step form preserved)
+7. Reciprocal Clubs – (Not explicitly found on main page; placeholder included)
+8. Contact & Location – Phone: 401-863-3023, Address: Brown University Providence RI 02912, Hours: M-F 11:30 AM - 2:00 PM
+9. Footer – Standard Brown University links (Visit, Campus Map, A-Z, Contact, News, Events, Safety, Accessibility, Careers)
+
+Recreated slots in order:
+- SLOT: global-nav
+- SLOT: hero
+- SLOT: highlights/amenities
+- SLOT: dining & events
+- SLOT: membership-cta
+- SLOT: my-membership-form (original form preserved)
+- SLOT: reciprocal-clubs (placeholder with TODO)
+- SLOT: contact & location
+- SLOT: footer
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Brown Faculty Club — Membership & Services</title>
+<style>
+  /* Base tokens preserved from original mock */
+  :root{
+    --bg:#f6f8fb; --card:#ffffff; --accent:#0b6ef6; --muted:#667085;
+    --radius:12px; --maxw:880px;
+    --brown-dark:#4e3629; --brown-accent:#8b6f47;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body{
+    font-family:Inter,system-ui,Segoe UI,Roboto,Arial; 
+    background:var(--bg); 
+    margin:0; 
+    padding:0; 
+    color:#0b1531;
+    line-height:1.6;
+  }
+  
+  /* Global Nav */
+  .global-nav{
+    background:var(--card); 
+    box-shadow:0 2px 8px rgba(10,20,40,0.08); 
+    position:sticky; 
+    top:0; 
+    z-index:100;
+  }
+  .nav-container{
+    max-width:var(--maxw); 
+    margin:0 auto; 
+    padding:16px 28px; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center;
+  }
+  .nav-logo{
+    font-size:18px; 
+    font-weight:700; 
+    color:var(--brown-dark); 
+    text-decoration:none;
+  }
+  .nav-links{
+    display:flex; 
+    gap:24px; 
+    list-style:none; 
+    margin:0; 
+    padding:0;
+  }
+  .nav-links a{
+    color:var(--muted); 
+    text-decoration:none; 
+    font-size:14px; 
+    font-weight:500; 
+    transition:color 0.2s;
+  }
+  .nav-links a:hover{
+    color:var(--accent);
+  }
+  
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-accent) 100%); 
+    color:#fff; 
+    text-align:center; 
+    padding:64px 28px;
+  }
+  .hero h1{
+    font-size:42px; 
+    margin:0 0 16px; 
+    font-weight:700;
+  }
+  .hero p{
+    font-size:18px; 
+    opacity:0.9; 
+    margin:0 0 32px; 
+    max-width:600px; 
+    margin-left:auto; 
+    margin-right:auto;
+  }
+  .hero-cta{
+    display:inline-block; 
+    background:#fff; 
+    color:var(--brown-dark); 
+    padding:14px 28px; 
+    border-radius:10px; 
+    text-decoration:none; 
+    font-weight:600; 
+    transition:transform 0.2s, opacity 0.2s;
+  }
+  .hero-cta:hover{
+    transform:translateY(-2px); 
+    opacity:0.9;
+  }
+  
+  /* Section container */
+  .section{
+    max-width:var(--maxw); 
+    margin:48px auto; 
+    padding:0 28px;
+  }
+  .section h2{
+    font-size:28px; 
+    margin:0 0 16px; 
+    color:var(--brown-dark);
+  }
+  .section p{
+    color:var(--muted); 
+    margin:0 0 24px;
+  }
+  
+  /* Highlights grid */
+  .highlights-grid{
+    display:grid; 
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); 
+    gap:20px; 
+    margin-top:24px;
+  }
+  .highlight-item{
+    background:var(--card); 
+    padding:20px; 
+    border-radius:var(--radius); 
+    box-shadow:0 4px 12px rgba(10,20,40,0.06);
+    text-align:center;
+  }
+  .highlight-item h3{
+    font-size:16px; 
+    margin:12px 0 8px; 
+    color:#0b1531;
+  }
+  .highlight-item p{
+    font-size:14px; 
+    color:var(--muted); 
+    margin:0;
+  }
+  .highlight-icon{
+    width:48px; 
+    height:48px; 
+    margin:0 auto;
+  }
+  
+  /* CTA block */
+  .cta-block{
+    background:var(--card); 
+    padding:32px; 
+    border-radius:var(--radius); 
+    box-shadow:0 8px 30px rgba(10,20,40,0.06); 
+    text-align:center; 
+    margin:48px auto;
+  }
+  .cta-block h2{
+    margin-top:0;
+  }
+  .cta-block ul{
+    text-align:left; 
+    max-width:500px; 
+    margin:24px auto; 
+    padding-left:24px;
+  }
+  .cta-block li{
+    margin-bottom:12px; 
+    color:var(--muted);
+  }
+  .btn-cta{
+    display:inline-block; 
+    background:var(--accent); 
+    color:#fff; 
+    padding:12px 24px; 
+    border-radius:10px; 
+    text-decoration:none; 
+    font-weight:600; 
+    transition:transform 0.2s, opacity 0.9s;
+  }
+  .btn-cta:hover{
+    transform:translateY(-2px); 
+    opacity:0.9;
+  }
+  
+  /* Form card (original styles preserved) */
+  .container{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .card{
+    background:var(--card); 
+    border-radius:var(--radius); 
+    box-shadow:0 8px 30px rgba(10,20,40,0.06); 
+    padding:28px; 
+    margin:48px auto;
+  }
+  h1{margin:0 0 8px; font-size:22px;}
+  p.lead{color:var(--muted); margin:0 0 18px;}
+  .steps{display:flex; gap:8px; margin-bottom:18px; align-items:center;}
+  .step{flex:1; padding:8px 10px; text-align:center; border-radius:10px; background:linear-gradient(180deg,#f3f6ff,#fff); font-size:13px; color:#334155;}
+  .step.active{background:var(--accent); color:#fff; font-weight:600;}
+  form{margin-top:12px;}
+  .row{display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;}
+  label{display:block; font-size:13px; color:#0b1531; margin-bottom:6px;}
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea{
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid #e6eef8; box-sizing:border-box;
+    background:#fbfdff;
+  }
+  textarea{min-height:90px; resize:vertical;}
+  .col-2{flex:1 1 48%;}
+  .col-3{flex:1 1 30%;}
+  .col-full{flex:1 1 100%;}
+  .actions{display:flex; gap:10px; justify-content:space-between; margin-top:18px;}
+  button{padding:10px 14px; border-radius:10px; border:0; cursor:pointer; transition:transform 0.2s, opacity 0.2s;}
+  .btn-primary{background:var(--accent); color:white; font-weight:600;}
+  .btn-primary:hover{transform:translateY(-1px); opacity:0.95;}
+  .btn-ghost{background:transparent; border:1px solid #e6eef8; color:var(--muted);}
+  .btn-ghost:hover{background:#f9fafb;}
+  .small{font-size:13px; color:var(--muted);}
+  .error{color:#c62828; font-size:13px; margin-top:6px;}
+  .preview-box{border:1px dashed #e3e8f6; padding:12px; border-radius:10px; background:#fbfdff;}
+  .thumb{display:inline-block; max-width:120px; max-height:90px; object-fit:cover; border-radius:8px; border:1px solid #e6eef8;}
+  pre.json-out{background:#0b1220; color:#e6f0ff; padding:12px; border-radius:8px; overflow:auto; max-height:320px;}
+  
+  /* Contact section */
+  .contact-grid{
+    display:grid; 
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); 
+    gap:24px; 
+    margin-top:24px;
+  }
+  .contact-card{
+    background:var(--card); 
+    padding:20px; 
+    border-radius:var(--radius); 
+    box-shadow:0 4px 12px rgba(10,20,40,0.06);
+  }
+  .contact-card h3{
+    font-size:16px; 
+    margin:0 0 12px; 
+    color:#0b1531;
+  }
+  .contact-card p{
+    font-size:14px; 
+    color:var(--muted); 
+    margin:6px 0;
+  }
+  .contact-card a{
+    color:var(--accent); 
+    text-decoration:none;
+  }
+  .contact-card a:hover{
+    text-decoration:underline;
+  }
+  
+  /* Footer */
+  .footer{
+    background:var(--brown-dark); 
+    color:#fff; 
+    padding:48px 28px 32px; 
+    margin-top:64px;
+  }
+  .footer-container{
+    max-width:var(--maxw); 
+    margin:0 auto;
+  }
+  .footer-links{
+    display:flex; 
+    flex-wrap:wrap; 
+    gap:20px; 
+    margin-bottom:24px; 
+    justify-content:center;
+  }
+  .footer-links a{
+    color:#fff; 
+    text-decoration:none; 
+    font-size:14px; 
+    opacity:0.8; 
+    transition:opacity 0.2s;
+  }
+  .footer-links a:hover{
+    opacity:1;
+  }
+  .footer-legal{
+    text-align:center; 
+    font-size:13px; 
+    opacity:0.7; 
+    margin-top:24px; 
+    padding-top:24px; 
+    border-top:1px solid rgba(255,255,255,0.2);
+  }
+  
+  /* Responsive */
+  @media (max-width:640px){ 
+    .col-2,.col-3{flex:1 1 100%;} 
+    .actions{flex-direction:column-reverse; gap:8px;} 
+    .nav-links{display:none;}
+    .hero h1{font-size:32px;}
+    .section{margin:32px auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- SLOT: global-nav -->
+<nav class="global-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+    <a href="#hero" class="nav-logo">Brown Faculty Club</a>
+    <ul class="nav-links">
+      <li><a href="#highlights">About</a></li>
+      <li><a href="#dining-events">Dining & Events</a></li>
+      <li><a href="#membership-form">Membership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- SLOT: hero -->
+<section id="hero" class="hero" role="banner">
+  <h1>Welcome to the Brown Faculty Club</h1>
+  <p>A distinguished gathering place for faculty, offering exceptional cuisine, elegant event spaces, and a vibrant community at the heart of Brown's campus.</p>
+  <a href="#membership-form" class="hero-cta">Join Today</a>
+</section>
+
+<!-- SLOT: highlights/amenities -->
+<section id="highlights" class="section">
+  <h2>Member Benefits</h2>
+  <p>Experience the advantages of club membership designed for Brown's distinguished faculty and staff.</p>
+  
+  <div class="highlights-grid">
+    <div class="highlight-item">
+      <svg class="highlight-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="48" height="48" rx="8" fill="#f3f6ff"/>
+        <path d="M24 14L16 20V34H32V20L24 14Z" stroke="#0b6ef6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 34V26H28V34" stroke="#0b6ef6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Exceptional Cuisine</h3>
+      <p>Farm-to-table lunch service Monday through Friday featuring seasonal menus.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <svg class="highlight-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="48" height="48" rx="8" fill="#f3f6ff"/>
+        <rect x="14" y="18" width="20" height="16" rx="2" stroke="#0b6ef6" stroke-width="2"/>
+        <path d="M20 18V16C20 14.8954 20.8954 14 22 14H26C27.1046 14 28 14.8954 28 16V18" stroke="#0b6ef6" stroke-width="2"/>
+        <circle cx="24" cy="26" r="2" fill="#0b6ef6"/>
+      </svg>
+      <h3>Private Event Spaces</h3>
+      <p>Barbara's Bar and flexible meeting rooms perfect for receptions, banquets, and department gatherings.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <svg class="highlight-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="48" height="48" rx="8" fill="#f3f6ff"/>
+        <circle cx="24" cy="18" r="4" stroke="#0b6ef6" stroke-width="2"/>
+        <path d="M16 34C16 29.5817 19.5817 26 24 26C28.4183 26 32 29.5817 32 34" stroke="#0b6ef6" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h3>Professional Staff</h3>
+      <p>Experienced event coordinators and culinary team dedicated to exceptional service.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <svg class="highlight-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="48" height="48" rx="8" fill="#f3f6ff"/>
+        <path d="M24 34C29.5228 34 34 29.5228 34 24C34 18.4772 29.5228 14 24 14C18.4772 14 14 18.4772 14 24C14 29.5228 18.4772 34 24 34Z" stroke="#0b6ef6" stroke-width="2"/>
+        <path d="M24 20V24L27 27" stroke="#0b6ef6" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h3>Historic Venue</h3>
+      <p>Centrally located on campus in a beautifully appointed historic building.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLOT: dining & events -->
+<section id="dining-events" class="section">
+  <h2>Dining & Private Events</h2>
+  
+  <div class="cta-block">
+    <h3 style="margin-top:0;">Hours of Operation</h3>
+    <p><strong>À La Carte Lunch:</strong> Monday through Friday, 11:30 AM – 2:00 PM</p>
+    <p style="margin-bottom:24px;">Reservations and take-out available by calling <a href="tel:4018633023" style="color:var(--accent);">401-863-3023</a></p>
+    
+    <hr style="border:0; border-top:1px solid #e6eef8; margin:32px 0;" />
+    
+    <h3>Barbara's Bar &amp; Event Spaces</h3>
+    <p>Our well-appointed, flexible interior provides excellent facilities for private parties, wedding receptions, banquets, and departmental meetings.</p>
+    
+    <p style="margin-top:24px; font-size:14px; color:var(--muted);">We partner with local vendors including Community Harvest and Farm Fresh Rhode Island to provide exceptional catering services.</p>
+  </div>
+</section>
+
+<!-- SLOT: membership-cta -->
+<section class="section">
+  <div class="cta-block">
+    <h2>Discover the Benefits of Membership</h2>
+    <p>Join the Brown Faculty Club and enjoy access to:</p>
+    
+    <ul>
+      <li><strong>Daily lunch service</strong> with seasonal, locally-sourced menus</li>
+      <li><strong>Priority booking</strong> for private events and meeting spaces</li>
+      <li><strong>Exclusive member rates</strong> for room rentals and catering</li>
+      <li><strong>Networking opportunities</strong> with colleagues across departments</li>
+      <li><strong>Access to reciprocal clubs</strong> at universities worldwide</li>
+    </ul>
+    
+    <a href="#membership-form" class="btn-cta">Apply for Membership</a>
+  </div>
+</section>
+
+<!-- SLOT: my-membership-form (keep my existing form + logic) -->
+<div class="container" id="membership-form">
+  <div class="card" id="app">
+    <h1>Faculty Club — Membership Application</h1>
+    <p class="lead">Complete this multi-step form to apply for membership. All information is processed locally for demonstration purposes.</p>
+
+    <div class="steps" id="steps">
+      <div class="step" data-step="1">1. Profile</div>
+      <div class="step" data-step="2">2. Membership</div>
+      <div class="step" data-step="3">3. Extras</div>
+      <div class="step" data-step="4">4. Preview</div>
+    </div>
+
+    <form id="demoForm" onsubmit="return false;">
+      <!-- STEP 1 -->
+      <div class="form-step" data-step="1">
+        <div class="row">
+          <div class="col-2">
+            <label>First name <span class="small">*</span></label>
+            <input id="firstName" type="text" required />
+            <div class="error" data-for="firstName" style="display:none;"></div>
+          </div>
+          <div class="col-2">
+            <label>Last name <span class="small">*</span></label>
+            <input id="lastName" type="text" required />
+            <div class="error" data-for="lastName" style="display:none;"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2">
+            <label>Email <span class="small">*</span></label>
+            <input id="email" type="email" required />
+            <div class="error" data-for="email" style="display:none;"></div>
+          </div>
+          <div class="col-2">
+            <label>Phone</label>
+            <input id="phone" type="tel" placeholder="+1 555 555 5555" />
+            <div class="small">Optional</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-full">
+            <label>Profile photo (optional)</label>
+            <input id="photo" type="file" accept="image/*" />
+            <div style="margin-top:8px;" id="photoPreview"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="form-step" data-step="2" style="display:none;">
+        <div class="row">
+          <div class="col-2">
+            <label>Membership type</label>
+            <select id="membershipType">
+              <option value="regular">Regular (annual)</option>
+              <option value="sustaining">Sustaining (donor)</option>
+              <option value="student">Student / Emeritus</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <label>Department</label>
+            <input id="department" type="text" placeholder="e.g., Biology" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-full">
+            <label>Would you be interested in hosting events at the club?</label>
+            <select id="hostEvents">
+              <option value="no">No</option>
+              <option value="yes">Yes — occasionally</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="hostDetails" style="display:none; margin-top:12px;">
+          <label>If yes — what types of events?</label>
+          <textarea id="hostTypes" placeholder="Department socials, lectures, dinners..."></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="form-step" data-step="3" style="display:none;">
+        <div class="row">
+          <div class="col-full">
+            <label>Emergency contact</label>
+            <input id="emergency" type="text" placeholder="Name & phone" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <label>Do you want to receive newsletters?</label>
+            <select id="newsletter">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <label>Preferred contact method</label>
+            <select id="contactMethod">
+              <option>email</option>
+              <option>phone</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <label>How did you hear about us?</label>
+            <input id="heard" type="text" placeholder="Colleague, website, email..." />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-full">
+            <label>Notes / special requests</label>
+            <textarea id="notes" placeholder="Dietary restrictions, accessibility notes, etc."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 (Preview) -->
+      <div class="form-step" data-step="4" style="display:none;">
+        <h3 style="margin-top:0">Preview submission</h3>
+        <div class="preview-box" id="previewBox">
+          <!-- Filled by JS -->
+        </div>
+        <div style="margin-top:12px;">
+          <strong>Raw data (JSON)</strong>
+          <pre class="json-out" id="jsonOut">{ }</pre>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div>
+          <button class="btn-ghost" id="backBtn" type="button" style="display:none;">← Back</button>
+        </div>
+        <div>
+          <button class="btn-ghost" id="saveBtn" type="button">Save JSON</button>
+          <button class="btn-primary" id="nextBtn" type="button">Next →</button>
+        </div>
+      </div>
+    </form>
+
+    <div style="margin-top:12px;" class="small">Tip: Use the <strong>Save JSON</strong> button in Preview to download what would be sent to a server (demonstrates payload).</div>
+  </div>
+</div>
+
+<!-- SLOT: reciprocal-clubs -->
+<!-- TODO: Add actual list of reciprocal university clubs when content becomes available -->
+<section class="section">
+  <div class="cta-block">
+    <h2>Reciprocal Clubs</h2>
+    <p>Brown Faculty Club members enjoy access to a network of reciprocal clubs at leading universities worldwide. Visit peer institutions and experience their hospitality while traveling.</p>
+    <p style="margin-top:24px;"><a href="#contact" class="btn-cta" style="background:var(--brown-accent);">Request Reciprocal Club List</a></p>
+  </div>
+</section>
+
+<!-- SLOT: contact & location -->
+<section id="contact" class="section">
+  <h2>Contact & Location</h2>
+  <p>We're here to answer your questions and help plan your next event.</p>
+  
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Phone & Reservations</h3>
+      <p><a href="tel:4018633023">401-863-3023</a></p>
+      <p class="small">Call for dining reservations, take-out orders, or event inquiries</p>
+    </div>
+    
+    <div class="contact-card">
+      <h3>Location</h3>
+      <p>Brown University<br>
+      75 Waterman Street<br>
+      Providence, RI 02912</p>
+      <p class="small"><a href="https://maps.brown.edu/" target="_blank" rel="noopener">View Campus Map</a></p>
+    </div>
+    
+    <div class="contact-card">
+      <h3>Hours</h3>
+      <p><strong>Lunch Service:</strong><br>
+      Monday – Friday<br>
+      11:30 AM – 2:00 PM</p>
+      <p class="small">Closed weekends and university holidays</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLOT: footer -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-container">
+    <div class="footer-links">
+      <a href="https://www.brown.edu/about/visit" target="_blank" rel="noopener">Visit Brown</a>
+      <a href="https://maps.brown.edu/" target="_blank" rel="noopener">Campus Map</a>
+      <a href="https://www.brown.edu/a-z" target="_blank" rel="noopener">A to Z</a>
+      <a href="https://www.brown.edu/about/contact-us" target="_blank" rel="noopener">Contact Us</a>
+      <a href="https://www.brown.edu/news" target="_blank" rel="noopener">News</a>
+      <a href="https://events.brown.edu/" target="_blank" rel="noopener">Events</a>
+      <a href="https://dps.brown.edu/" target="_blank" rel="noopener">Campus Safety</a>
+      <a href="https://www.brown.edu/website-accessibility" target="_blank" rel="noopener">Accessibility</a>
+      <a href="https://www.brown.edu/careers" target="_blank" rel="noopener">Careers at Brown</a>
+    </div>
+    
+    <div class="footer-legal">
+      <p>Brown University | Providence, RI 02912 | <a href="tel:4018631000" style="color:#fff; opacity:0.8;">401-863-1000</a></p>
+      <p>&copy; 2025 Brown University. This is a demonstration mock-up for internal review.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Small client-only multi-step form logic (preserved from original)
+  const stepsElems = [...document.querySelectorAll('.step')];
+  const formSteps = [...document.querySelectorAll('.form-step')];
+  let cur = 1;
+
+  const updateSteps = () => {
+    stepsElems.forEach(s => {
+      s.classList.toggle('active', Number(s.dataset.step) === cur);
+    });
+    formSteps.forEach(f => {
+      f.style.display = Number(f.dataset.step) === cur ? 'block' : 'none';
+    });
+    document.getElementById('backBtn').style.display = cur === 1 ? 'none' : 'inline-block';
+    document.getElementById('nextBtn').textContent = cur === 4 ? 'Submit' : 'Next →';
+  };
+  updateSteps();
+
+  // Navigation
+  document.getElementById('nextBtn').addEventListener('click', async () => {
+    if (cur < 4) {
+      if (!validateStep(cur)) return;
+      cur++;
+      if (cur === 4) buildPreview();
+      updateSteps();
+    } else {
+      if (!validateStep(cur)) return;
+      // "Submit" action: show JSON (already in preview) and show a friendly message
+      alert('This is a demo. Data is shown in the preview area and can be saved as a JSON file.');
+    }
+  });
+
+  document.getElementById('backBtn').addEventListener('click', () => {
+    if (cur > 1) cur--;
+    updateSteps();
+  });
+
+  // Conditional hostEvents
+  document.getElementById('hostEvents').addEventListener('change', (e) => {
+    const el = document.getElementById('hostDetails');
+    el.style.display = e.target.value === 'yes' ? 'block' : 'none';
+  });
+
+  // Photo preview
+  document.getElementById('photo').addEventListener('change', (e) => {
+    const p = document.getElementById('photoPreview');
+    p.innerHTML = '';
+    const file = e.target.files[0];
+    if (!file) return;
+    const img = document.createElement('img');
+    img.className = 'thumb';
+    img.alt = 'Profile';
+    p.appendChild(img);
+    const reader = new FileReader();
+    reader.onload = () => img.src = reader.result;
+    reader.readAsDataURL(file);
+  });
+
+  // Basic validation per step
+  function validateStep(step) {
+    // Clear previous errors
+    document.querySelectorAll('.error').forEach(e => e.style.display = 'none');
+
+    if (step === 1) {
+      const f = document.getElementById('firstName').value.trim();
+      const l = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      let ok = true;
+      if (!f) { showError('firstName','Please enter first name'); ok=false; }
+      if (!l) { showError('lastName','Please enter last name'); ok=false; }
+      if (!validateEmail(email)) { showError('email','Enter a valid email'); ok=false; }
+      return ok;
+    }
+    // other steps not strict for demo
+    return true;
+  }
+  function showError(id,msg){
+    const el = document.querySelector(`.error[data-for="${id}"]`);
+    if (el){ el.textContent = msg; el.style.display = 'block'; }
+  }
+  function validateEmail(email){
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  // Build preview
+  function collectData() {
+    return {
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      membershipType: document.getElementById('membershipType').value,
+      department: document.getElementById('department').value.trim(),
+      hostEvents: document.getElementById('hostEvents').value,
+      hostTypes: document.getElementById('hostTypes').value.trim(),
+      emergency: document.getElementById('emergency').value.trim(),
+      newsletter: document.getElementById('newsletter').value,
+      contactMethod: document.getElementById('contactMethod').value,
+      heard: document.getElementById('heard').value,
+      notes: document.getElementById('notes').value,
+      photoName: (document.getElementById('photo').files[0] || {}).name || null,
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  function buildPreview(){
+    const data = collectData();
+    const preview = document.getElementById('previewBox');
+    preview.innerHTML = `
+      <strong>${escapeHtml(data.firstName || '[First]')} ${escapeHtml(data.lastName || '[Last]')}</strong>
+      <div class="small">${escapeHtml(data.email || '')}${data.phone ? ' · ' + escapeHtml(data.phone) : ''}</div>
+      <hr style="margin:10px 0;" />
+      <div><strong>Membership:</strong> ${escapeHtml(data.membershipType)} · ${escapeHtml(data.department)}</div>
+      <div><strong>Host events:</strong> ${escapeHtml(data.hostEvents)} ${data.hostTypes ? '<div style="margin-top:6px;">' + escapeHtml(data.hostTypes) + '</div>' : ''}</div>
+      <div style="margin-top:8px;"><strong>Newsletter:</strong> ${escapeHtml(data.newsletter)} · Preferred: ${escapeHtml(data.contactMethod)}</div>
+      <div style="margin-top:8px;"><strong>Notes:</strong> ${escapeHtml(data.notes || '—')}</div>
+      ${data.photoName ? `<div style="margin-top:8px;"><strong>Uploaded photo:</strong> ${escapeHtml(data.photoName)}</div>` : ''}
+    `;
+    document.getElementById('jsonOut').textContent = JSON.stringify(data, null, 2);
+  }
+
+  // Save JSON button
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    const data = collectData();
+    const filename = `faculty-club-demo-${(new Date()).toISOString().slice(0,19)}.json`;
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  // Utility
+  function escapeHtml(s){ if (!s) return ''; return s.replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]); }
+
+  // Expose steps clickable
+  stepsElems.forEach(s => s.addEventListener('click', () => {
+    const n = Number(s.dataset.step);
+    cur = n;
+    if (cur === 4) buildPreview();
+    updateSteps();
+  }));
+
+  // small: load default test values for nicer demo (remove/comment if you want blank)
+  (function seedDemo(){
+    document.getElementById('firstName').value = 'Alex';
+    document.getElementById('lastName').value = 'Morgan';
+    document.getElementById('email').value = 'alex.morgan@example.edu';
+    document.getElementById('department').value = 'English';
+  })();
+
+</script>
+</body>
+</html>
