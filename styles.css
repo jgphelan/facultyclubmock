@@ -707,6 +707,60 @@ button{padding:10px 14px; border-radius:10px; border:0; cursor:pointer; transiti
 .thumb{display:inline-block; max-width:120px; max-height:90px; object-fit:cover; border-radius:8px; border:1px solid #e6eef8;}
 pre.json-out{background:#0b1220; color:#e6f0ff; padding:12px; border-radius:8px; overflow:auto; max-height:320px; font-size:12px;}
 
+/* Room Reservations Table */
+.room-reservations-table{
+  margin:24px 0;
+}
+.reservations-table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  background:var(--card);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 2px 12px rgba(10,20,40,0.08);
+}
+.reservations-table th{
+  background:var(--brown-dark);
+  color:#fff;
+  padding:16px 12px;
+  text-align:left;
+  font-weight:600;
+  font-size:14px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.reservations-table td{
+  padding:14px 12px;
+  border-bottom:1px solid #e6eef8;
+  font-size:14px;
+  vertical-align:top;
+}
+.reservations-table tr:last-child td{
+  border-bottom:none;
+}
+.reservations-table tr:hover{
+  background:rgba(11,110,246,0.02);
+}
+.room-link{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:600;
+  cursor:pointer;
+  transition:color 0.2s;
+}
+.room-link:hover{
+  color:var(--brown-dark);
+  text-decoration:underline;
+}
+.table-notes{
+  margin-top:16px;
+}
+.table-notes p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
 /* Footer */
 .footer{
   background:var(--brown-dark); 
@@ -778,5 +832,22 @@ pre.json-out{background:#0b1220; color:#e6f0ff; padding:12px; border-radius:8px;
   }
   .modal-actions .btn{
     text-align:center;
+  }
+  
+  /* Responsive table */
+  .room-reservations-table{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .reservations-table{
+    min-width:600px;
+  }
+  .reservations-table th,
+  .reservations-table td{
+    font-size:13px;
+    padding:10px 8px;
+  }
+  .reservations-table th{
+    white-space:nowrap;
   }
 }

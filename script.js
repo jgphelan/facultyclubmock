@@ -33,6 +33,13 @@ navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const pageId = link.getAttribute('data-page');
+    
+    // Special handling for application links - redirect to Google Form
+    if (pageId === 'application') {
+      window.open('https://docs.google.com/forms/d/e/1FAIpQLSfXY9Ys2BcHLHmOxMFrxPs5_0mmExUje3q6TOE_-e0bSc44rQ/viewform', '_blank');
+      return;
+    }
+    
     showPage(pageId);
   });
 });
@@ -326,77 +333,219 @@ if (document.getElementById('photoCarousel') && totalSlides > 0) {
 const facilityData = {
   huttner: {
     title: 'Huttner Room',
-    image: 'file:///C:/Users/jgphelan/OneDrive%20-%20Brown%20University/Faculty%20Club%20Photo%20Dump/IMG_0243.jpg',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Huttner 1.jpg', // Using inline placeholder instead
     description: `
-      <p>The Huttner Room is our premier private dining space, offering an elegant atmosphere perfect for formal gatherings, special celebrations, and distinguished events. Named after a prominent Brown University benefactor, this beautifully appointed room combines classic charm with modern amenities.</p>
-      <p>Features include rich wood paneling, elegant furnishings, and ambient lighting that creates an intimate yet sophisticated dining experience. The room's flexible layout can accommodate various seating arrangements to suit your event needs.</p>
-      <p>Perfect for faculty dinners, department celebrations, wedding receptions, and other special occasions that require a refined setting.</p>
+      <p>The Huttner Room is the Faculty Club's flagship private dining space, offering an atmosphere of distinguished elegance perfect for the most important occasions. This beautifully appointed room showcases the finest in traditional university club design, featuring rich mahogany paneling, crystal chandeliers, and meticulously maintained period furnishings that reflect Brown's storied academic heritage.</p>
+      <p>Named in honor of generous University benefactors, the room embodies the timeless sophistication expected of an Ivy League institution. The space features professional table service, elegant china and glassware, and acoustics carefully designed for both intimate conversation and formal presentations.</p>
+      <p>Weather permitting, events in the Huttner Room include exclusive access to the adjoining Cornell Courtyard, a charming outdoor space perfect for cocktail hours, reception mingling, or al fresco dining extensions. This unique feature makes the Huttner Room ideal for spring and summer celebrations, graduation dinners, milestone anniversaries, wedding receptions, and distinguished faculty honors ceremonies.</p>
     `,
     specs: `
       <ul class="spec-list">
-        <li><strong>Capacity:</strong> Up to 40 guests</li>
-        <li><strong>Layout:</strong> Formal dining</li>
-        <li><strong>Features:</strong> Private entrance</li>
-        <li><strong>A/V:</strong> Available upon request</li>
-        <li><strong>Catering:</strong> Full-service available</li>
-        <li><strong>Ambiance:</strong> Elegant & intimate</li>
+        <li><strong>Dimensions:</strong> 32' x 43'</li>
+        <li><strong>Seated Capacity:</strong> 96 guests</li>
+        <li><strong>Reception Capacity:</strong> 130 guests</li>
+        <li><strong>Minimum F&B:</strong> $1,500</li>
+        <li><strong>Features:</strong> Cornell Courtyard access, mahogany paneling</li>
+        <li><strong>A/V Equipment:</strong> Professional presentation system available</li>
+        <li><strong>Best for:</strong> Formal dinners, wedding receptions, major celebrations</li>
       </ul>
     `
   },
   landscape: {
     title: 'Landscape Room',
-    image: 'file:///C:/Users/jgphelan/OneDrive%20-%20Brown%20University/Faculty%20Club%20Photo%20Dump/IMG_0239.jpg',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Landscape 1.jpg',
     description: `
-      <p>The Landscape Room offers a versatile meeting space with abundant natural light and flexible seating arrangements. This modern, comfortable room is ideal for presentations, workshops, departmental meetings, and professional gatherings.</p>
-      <p>Large windows provide inspiring views of the campus landscape, while the neutral color palette and contemporary furnishings create a professional yet welcoming environment. The room's adaptable layout ensures it can meet various meeting formats and group sizes.</p>
-      <p>Equipped with modern amenities and technology support, the Landscape Room is perfect for academic conferences, board meetings, and collaborative work sessions.</p>
+      <p>The Landscape Room represents the perfect fusion of traditional university club elegance with contemporary functionality. This versatile space features floor-to-ceiling windows that flood the room with natural light while providing inspiring views of Brown's historic campus landscape, creating an atmosphere that stimulates both creativity and productivity.</p>
+      <p>The room's sophisticated neutral color palette, featuring warm grays and browns complemented by rich wood accents, creates a professional yet welcoming environment. Comfortable upholstered seating can be arranged in multiple configurations - from boardroom-style meetings to classroom presentations to workshop circles - making this space exceptionally adaptable to your specific needs.</p>
+      <p>Modern amenities include integrated audio-visual technology, wireless presentation capabilities, and climate control, while maintaining the refined atmosphere expected of a prestigious university club. The Landscape Room is particularly popular for academic conferences, department retreats, board meetings, professional development workshops, and collaborative planning sessions.</p>
     `,
     specs: `
       <ul class="spec-list">
-        <li><strong>Capacity:</strong> Up to 25 guests</li>
-        <li><strong>Layout:</strong> Flexible seating</li>
-        <li><strong>Features:</strong> Natural light</li>
-        <li><strong>A/V:</strong> Built-in presentation system</li>
-        <li><strong>Catering:</strong> Coffee service available</li>
-        <li><strong>Ambiance:</strong> Professional & bright</li>
+        <li><strong>Dimensions:</strong> 17' x 44'</li>
+        <li><strong>Seated Capacity:</strong> 51 guests</li>
+        <li><strong>Reception Capacity:</strong> 70 guests</li>
+        <li><strong>Minimum F&B:</strong> $650</li>
+        <li><strong>Features:</strong> Floor-to-ceiling windows, campus views</li>
+        <li><strong>A/V Equipment:</strong> Integrated presentation system with wireless capability</li>
+        <li><strong>Best for:</strong> Academic conferences, professional meetings, workshops</li>
       </ul>
     `
   },
-  piscerne: {
-    title: 'Piscerne Room',
-    image: 'file:///C:/Users/jgphelan/OneDrive%20-%20Brown%20University/Faculty%20Club%20Photo%20Dump/IMG_0088%20(1).jpg',
+  picerne: {
+    title: 'Picerne Room',
+    image: null,
     description: `
-      <p>The intimate Piscerne Room provides the perfect setting for small meetings, private conversations, and exclusive gatherings. This cozy space offers privacy and comfort, making it ideal for confidential discussions, small group consultations, and intimate dining experiences.</p>
-      <p>The room's warm atmosphere and thoughtful design create an environment conducive to meaningful conversations and focused collaboration. Rich fabrics, comfortable seating, and tasteful décor contribute to its welcoming ambiance.</p>
-      <p>Frequently chosen for executive meetings, private interviews, small celebration dinners, and other occasions requiring discretion and intimacy.</p>
+      <p>The Picerne Room offers an intimate sanctuary within the Faculty Club, perfect for confidential discussions, exclusive small group meetings, and private dining experiences that require discretion and exclusivity. This carefully appointed space combines the privacy of a personal study with the refined amenities of a prestigious university club.</p>
+      <p>The room features rich fabric wall coverings, comfortable upholstered seating, and warm lighting that creates an atmosphere conducive to meaningful conversation and focused collaboration. Thoughtful design details include sound-dampening materials for enhanced privacy, elegant wood furnishings, and carefully selected artwork that reflects academic excellence.</p>
+      <p>Due to its intimate scale and high demand among faculty and administrators, the Picerne Room has limited availability and is frequently chosen for executive committee meetings, confidential interviews, tenure discussions, small celebration dinners, and occasions requiring complete privacy and uninterrupted focus.</p>
     `,
     specs: `
       <ul class="spec-list">
-        <li><strong>Capacity:</strong> Up to 12 guests</li>
-        <li><strong>Layout:</strong> Intimate seating</li>
-        <li><strong>Features:</strong> Private & quiet</li>
-        <li><strong>A/V:</strong> Basic setup available</li>
-        <li><strong>Catering:</strong> Light refreshments</li>
-        <li><strong>Ambiance:</strong> Cozy & confidential</li>
+        <li><strong>Dimensions:</strong> 16' x 18'</li>
+        <li><strong>Seated Capacity:</strong> 24 guests</li>
+        <li><strong>Reception Capacity:</strong> 24 guests</li>
+        <li><strong>Minimum F&B:</strong> $325</li>
+        <li><strong>Availability:</strong> Limited due to high demand</li>
+        <li><strong>Features:</strong> Enhanced privacy, sound-dampening</li>
+        <li><strong>Best for:</strong> Executive meetings, confidential discussions</li>
       </ul>
     `
   },
   'barbaras-bar': {
     title: "Barbara's Bar",
-    image: 'file:///C:/Users/jgphelan/OneDrive%20-%20Brown%20University/Faculty%20Club%20Photo%20Dump/IMG_0096.jpg',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Bar 1.jpg',
     description: `
-      <p>Barbara's Bar provides a relaxed, social atmosphere perfect for casual dining, cocktail receptions, and informal gatherings. This welcoming space combines the comfort of a neighborhood pub with the sophistication expected of a university club.</p>
-      <p>The bar features a full selection of wines, craft beers, and classic cocktails, along with a menu of casual fare and light bites. Comfortable seating areas and a warm, inviting atmosphere make it ideal for after-work socializing and casual meetings.</p>
-      <p>Popular for faculty happy hours, casual networking events, alumni gatherings, and any occasion where conversation and conviviality are the primary goals.</p>
+      <p>Barbara's Bar embodies the quintessential university club atmosphere - a warm, inviting space where academic colleagues gather for spirited conversation, casual dining, and convivial networking. This thoughtfully designed space strikes the perfect balance between the relaxed comfort of a neighborhood tavern and the sophisticated ambiance expected of a distinguished Ivy League institution.</p>
+      <p>The bar features rich wood furnishings, comfortable leather seating areas, and tasteful academic memorabilia that celebrates Brown's illustrious history. Soft lighting creates an intimate atmosphere perfect for both quiet conversations and lively group discussions. The space includes both traditional bar seating and comfortable lounge areas with coffee tables and upholstered chairs.</p>
+      <p>Our skilled bartenders offer an extensive selection of craft beers, fine wines, single-malt scotches, and classic cocktails, complemented by a thoughtfully curated menu of elevated pub fare, artisanal appetizers, and light dinner options. Barbara's Bar hosts regular events including faculty wine tastings, book discussions, informal lecture series, and serves as the social heart of the Faculty Club community.</p>
     `,
     specs: `
       <ul class="spec-list">
-        <li><strong>Capacity:</strong> Up to 30 guests</li>
-        <li><strong>Layout:</strong> Bar & lounge seating</li>
-        <li><strong>Features:</strong> Full bar service</li>
-        <li><strong>A/V:</strong> Background music system</li>
-        <li><strong>Catering:</strong> Bar menu available</li>
-        <li><strong>Ambiance:</strong> Casual & social</li>
+        <li><strong>Seated Capacity:</strong> 20 guests</li>
+        <li><strong>Reception Capacity:</strong> 35 guests</li>
+        <li><strong>Minimum F&B:</strong> $250</li>
+        <li><strong>Features:</strong> Full bar service, comfortable lounge seating</li>
+        <li><strong>Cuisine:</strong> Elevated pub fare and artisanal appetizers</li>
+        <li><strong>Ambiance:</strong> Casual sophistication with academic charm</li>
+        <li><strong>Best for:</strong> Faculty mixers, casual dining, networking events</li>
+      </ul>
+    `
+  },
+  twaddell: {
+    title: 'Twaddell Room',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Twadell 1.jpg',
+    description: `
+      <p>The Twaddell Room exemplifies intimate elegance within the Faculty Club, providing a private sanctuary perfect for the most sensitive discussions and exclusive small gatherings. Named in honor of a distinguished Brown University family, this compact yet beautifully appointed space maintains the Club's highest standards of sophistication despite its modest dimensions.</p>
+      <p>The room's carefully curated décor includes fine artwork, quality furnishings scaled appropriately for the intimate space, and subtle lighting that creates an atmosphere of confidential discretion. Sound-absorbing materials and strategic positioning within the building ensure maximum privacy for sensitive conversations.</p>
+      <p>Due to its unique scale and the premium placed on privacy in academic settings, the Twaddell Room has extremely limited availability and is reserved for the most important confidential meetings. It is ideal for tenure committee deliberations, executive search discussions, sensitive negotiations, intimate celebration dinners for close colleagues, and other occasions requiring absolute discretion and exclusivity.</p>
+    `,
+    specs: `
+      <ul class="spec-list">
+        <li><strong>Dimensions:</strong> 12' x 14'</li>
+        <li><strong>Capacity:</strong> 12 guests maximum</li>
+        <li><strong>Minimum F&B:</strong> $100</li>
+        <li><strong>Availability:</strong> Extremely limited, by special request</li>
+        <li><strong>Features:</strong> Maximum privacy, sound-dampened</li>
+        <li><strong>Best for:</strong> Confidential meetings, executive discussions</li>
+      </ul>
+    `
+  },
+  'huttner-twaddell': {
+    title: 'Huttner/Twaddell Rooms Combined',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Huttner 5.jpg',
+    description: `
+      <p>The combined Huttner and Twaddell rooms create the Faculty Club's most magnificent event space, offering unparalleled capacity and grandeur for Brown University's most significant celebrations and gatherings. This extraordinary configuration transforms two distinguished individual spaces into a single, spectacular venue that maintains intimate elegance while accommodating substantial guest lists.</p>
+      <p>The combined space seamlessly integrates the mahogany elegance of the Huttner Room with the intimate charm of the Twaddell Room, creating multiple zones for varied activities within a single event. Guests can enjoy cocktail reception areas, formal dining spaces, presentation zones, and circulation areas, all flowing naturally together while maintaining the sophistication expected of an Ivy League institution.</p>
+      <p>With exclusive access to the Cornell Courtyard when weather permits, this premier venue expands to include beautiful outdoor spaces, making it ideal for the university's most important occasions: major wedding receptions, significant anniversary celebrations, presidential galas, large alumni gatherings, commencement dinners, and milestone institutional celebrations that require both grandeur and sophistication.</p>
+    `,
+    specs: `
+      <ul class="spec-list">
+        <li><strong>Configuration:</strong> Seamlessly integrated premium spaces</li>
+        <li><strong>Seated Capacity:</strong> 108 guests</li>
+        <li><strong>Reception Capacity:</strong> 142 guests</li>
+        <li><strong>Minimum F&B:</strong> $1,500</li>
+        <li><strong>Features:</strong> Cornell Courtyard access, multiple activity zones</li>
+        <li><strong>Layout:</strong> Highly flexible with premium appointments</li>
+        <li><strong>Best for:</strong> Major celebrations, presidential events, large weddings</li>
+      </ul>
+    `
+  },
+  class52: {
+    title: "Class of '52 Room",
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Class of 52 1.jpg',
+    description: `
+      <p>The Class of '52 Room stands as a distinguished tribute to the remarkable members of Brown University's Class of 1952, embodying the enduring spirit of academic excellence and alumni dedication that defines the Brown community. This elegantly appointed space serves as both a memorial to past achievements and an inspiration for future generations of scholars.</p>
+      <p>The room features classic university club design elements including rich mahogany wainscoting, period furnishings, and carefully curated historical photographs and memorabilia that celebrate Brown's illustrious past. Comfortable seating arrangements can accommodate both formal dinners and casual gatherings, while maintaining an atmosphere of dignified reverence for academic tradition.</p>
+      <p>With limited availability due to its historical significance and popularity among alumni groups, the Class of '52 Room is the preferred venue for reunion dinners, milestone anniversary celebrations, legacy society gatherings, emeritus faculty events, and other occasions that honor Brown's distinguished academic heritage and continuing traditions of excellence.</p>
+    `,
+    specs: `
+      <ul class="spec-list">
+        <li><strong>Dimensions:</strong> 16' x 24'</li>
+        <li><strong>Seated Capacity:</strong> 30 guests</li>
+        <li><strong>Minimum F&B:</strong> $325</li>
+        <li><strong>Availability:</strong> Limited for special occasions</li>
+        <li><strong>Features:</strong> Historic memorabilia, mahogany wainscoting</li>
+        <li><strong>Historical Significance:</strong> Dedicated to Class of 1952</li>
+        <li><strong>Best for:</strong> Alumni reunions, legacy events, emeritus celebrations</li>
+      </ul>
+    `
+  },
+  wriston: {
+    title: 'Wriston Terrace',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Cornell Courtyard 1.jpg',
+    description: `
+      <p>The Wriston Terrace offers a distinctive al fresco dining and entertainment experience that showcases the natural beauty of Brown's historic campus. Named in honor of former Brown University President Henry Merritt Wriston, this elegant outdoor space provides a refined alternative to traditional indoor venues, perfect for celebrating during New England's beautiful spring, summer, and early fall seasons.</p>
+      <p>The terrace features sophisticated outdoor furniture, ambient lighting for evening events, and stunning views of the surrounding campus landscape. Professional-grade weather protection and heating elements extend the usable season, while the space's flexible layout accommodates everything from intimate cocktail receptions to larger celebratory gatherings.</p>
+      <p>Weather-dependent availability makes the Wriston Terrace a special venue that requires advance planning and backup indoor arrangements. This unique outdoor setting is particularly popular for graduation celebrations, summer faculty receptions, garden party-style events, outdoor wedding ceremonies, and al fresco dining experiences that take advantage of Providence's most beautiful weather.</p>
+    `,
+    specs: `
+      <ul class="spec-list">
+        <li><strong>Dimensions:</strong> 21' x 53'</li>
+        <li><strong>Seated Capacity:</strong> 30 guests</li>
+        <li><strong>Reception Capacity:</strong> 50 guests</li>
+        <li><strong>Minimum F&B:</strong> $325</li>
+        <li><strong>Availability:</strong> Weather permitting (seasonal)</li>
+        <li><strong>Features:</strong> Campus views, ambient lighting, professional outdoor furniture</li>
+        <li><strong>Best for:</strong> Garden parties, graduation celebrations, outdoor ceremonies</li>
+      </ul>
+    `
+  },
+  kapstein: {
+    title: 'Kapstein Room',
+    image: null,
+    description: `
+      <p>The Kapstein Room represents the ideal fusion of professional functionality and university club elegance, providing a versatile venue that adapts seamlessly to a wide variety of academic and social gatherings. This thoughtfully designed space strikes the perfect balance between formal sophistication and approachable comfort.</p>
+      <p>The room features contemporary furnishings with classic touches, including comfortable seating that can be reconfigured for multiple event styles, warm lighting that enhances both daytime and evening events, and sophisticated décor that complements Brown's academic atmosphere. High-quality audio-visual equipment integrates seamlessly into the space without compromising its elegant ambiance.</p>
+      <p>The Kapstein Room's adaptability and reliable availability make it a popular choice for recurring events and spontaneous gatherings alike. It regularly hosts departmental meetings, academic seminars, professional development workshops, small conferences, birthday celebrations, and networking receptions that require a sophisticated yet flexible environment.</p>
+    `,
+    specs: `
+      <ul class="spec-list">
+        <li><strong>Dimensions:</strong> 18' x 16'</li>
+        <li><strong>Seated Capacity:</strong> 24 guests</li>
+        <li><strong>Reception Capacity:</strong> 28 guests</li>
+        <li><strong>Minimum F&B:</strong> $325</li>
+        <li><strong>Features:</strong> Highly flexible layout, contemporary comfort</li>
+        <li><strong>A/V Equipment:</strong> Integrated presentation system</li>
+        <li><strong>Best for:</strong> Department meetings, workshops, professional seminars</li>
+      </ul>
+    `
+  },
+  carberry: {
+    title: 'Carberry Room',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Carberry 1.jpg',
+    description: `
+      <p>The Carberry Room represents the ultimate in intimate exclusivity within the Faculty Club - a tiny jewel of a space that provides unparalleled privacy for the most sensitive and important conversations. This remarkably compact room proves that elegance and sophistication are not dependent on size, offering a perfectly appointed environment for discussions requiring absolute confidentiality.</p>
+      <p>Despite its modest footprint, every detail has been carefully considered to maximize both comfort and functionality. The room features custom-fitted furnishings, superior acoustic treatment for complete privacy, and lighting designed to create a warm, welcoming atmosphere that puts guests at ease during even the most challenging conversations.</p>
+      <p>The Carberry Room is reserved exclusively for the most critical and confidential meetings in academic life: presidential search committees, crisis management discussions, sensitive personnel matters, confidential donor consultations, and intimate celebrations marking truly special personal or professional milestones. Its rarity and exclusivity make it a privilege to use.</p>
+    `,
+    specs: `
+      <ul class="spec-list">
+        <li><strong>Dimensions:</strong> 8' x 10'</li>
+        <li><strong>Capacity:</strong> 6 guests maximum</li>
+        <li><strong>Minimum F&B:</strong> $100</li>
+        <li><strong>Features:</strong> Ultimate privacy, custom furnishings</li>
+        <li><strong>Exclusivity:</strong> Reserved for most sensitive discussions</li>
+        <li><strong>Best for:</strong> Presidential meetings, crisis management, VIP consultations</li>
+      </ul>
+    `
+  },
+  conference: {
+    title: 'Conference Room',
+    image: 'C:/Users/jgphelan/Downloads/Faculty Club Photo Dum/Faculty Club Photo Dump/Conference 1.jpg',
+    description: `
+      <p>The Conference Room represents the Faculty Club's commitment to supporting Brown University's academic mission through state-of-the-art meeting facilities designed specifically for professional productivity and collaborative excellence. This purpose-built space combines the sophistication expected of a university club with the functionality required for modern academic and administrative work.</p>
+      <p>The room features ergonomic seating, optimal lighting for both presentations and note-taking, advanced audio-visual technology including wireless presentation capabilities, and layout flexibility that supports everything from formal board meetings to interactive workshops. Self-service operation provides convenient access while maintaining cost-effectiveness for regular users.</p>
+      <p>As a self-service facility, the Conference Room offers independence and flexibility for frequent users, making it ideal for recurring department meetings, committee sessions, faculty training workshops, administrative planning sessions, and academic conferences that require professional-grade facilities with the convenience of autonomous operation.</p>
+    `,
+    specs: `
+      <ul class="spec-list">
+        <li><strong>Dimensions:</strong> 17' x 27'</li>
+        <li><strong>Seated Capacity:</strong> 32 guests</li>
+        <li><strong>Minimum F&B:</strong> $100</li>
+        <li><strong>Service Model:</strong> Self-service operation</li>
+        <li><strong>Features:</strong> Advanced A/V technology, ergonomic design</li>
+        <li><strong>A/V Equipment:</strong> Wireless presentation system, professional lighting</li>
+        <li><strong>Best for:</strong> Department meetings, training sessions, academic conferences</li>
       </ul>
     `
   }
@@ -406,12 +555,54 @@ function openFacilityModal(facilityId) {
   const modal = document.getElementById('facilityModal');
   const data = facilityData[facilityId];
   
-  if (!modal || !data) return;
+  if (!modal || !data) {
+    console.error('Modal or facility data not found:', facilityId);
+    return;
+  }
   
   // Update modal content
   document.getElementById('modalTitle').textContent = data.title;
-  document.getElementById('modalImage').src = data.image;
-  document.getElementById('modalImage').alt = data.title;
+  
+  // Handle the image area
+  const modalImageContainer = modal.querySelector('.modal-image');
+  const modalImage = document.getElementById('modalImage');
+  
+  // Remove any existing placeholder
+  const existingPlaceholder = document.getElementById('modalImagePlaceholder');
+  if (existingPlaceholder) {
+    existingPlaceholder.remove();
+  }
+  
+  if (data.image) {
+    // Show actual image if available
+    modalImage.src = `file:///${data.image}`;
+    modalImage.alt = data.title;
+    modalImage.style.display = 'block';
+    modalImage.style.cssText = 'width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;';
+  } else {
+    // Create placeholder if no image
+    modalImage.style.display = 'none';
+    
+    const placeholderDiv = document.createElement('div');
+    placeholderDiv.id = 'modalImagePlaceholder';
+    placeholderDiv.style.cssText = `
+      width: 100%;
+      height: 300px;
+      background: #2d3748;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    `;
+    placeholderDiv.textContent = data.title;
+    modalImageContainer.insertBefore(placeholderDiv, modalImageContainer.firstChild);
+  }
+  
+  // Update description and specs
   document.getElementById('modalDescription').innerHTML = data.description;
   document.getElementById('modalSpecs').innerHTML = data.specs;
   
@@ -429,6 +620,19 @@ function closeFacilityModal() {
   if (modal) {
     modal.style.display = 'none';
     document.body.style.overflow = ''; // Restore scrolling
+    
+    // Clean up placeholder if it exists
+    const placeholder = document.getElementById('modalImagePlaceholder');
+    if (placeholder) {
+      placeholder.remove();
+    }
+    
+    // Reset image element
+    const modalImage = document.getElementById('modalImage');
+    if (modalImage) {
+      modalImage.src = '';
+      modalImage.style.display = 'none';
+    }
   }
 }
 
@@ -438,10 +642,23 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.facility-card').forEach(card => {
     card.addEventListener('click', function() {
       const facilityId = this.getAttribute('data-facility');
+      console.log('Facility card clicked:', facilityId); // Debug log
       if (facilityId) {
         openFacilityModal(facilityId);
       }
     });
+  });
+
+  // Use event delegation for room links since they might be on different pages
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('room-link')) {
+      e.preventDefault();
+      const facilityId = e.target.getAttribute('data-facility');
+      console.log('Room link clicked via delegation:', facilityId); // Debug log
+      if (facilityId) {
+        openFacilityModal(facilityId);
+      }
+    }
   });
 
   // Add modal close handlers
